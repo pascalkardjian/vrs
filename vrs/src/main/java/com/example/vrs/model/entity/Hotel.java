@@ -21,7 +21,7 @@ public class Hotel {
 
     @Id
     @NotEmpty
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "destinationId")
@@ -33,9 +33,9 @@ public class Hotel {
     private String name;
 
     @NotEmpty
-    private Float cost;
+    private float cost;
 
     @NotEmpty
-    private Float rating;
+    private float rating;
 
 }

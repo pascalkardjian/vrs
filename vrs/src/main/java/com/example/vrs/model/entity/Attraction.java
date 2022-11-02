@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -18,22 +20,21 @@ import javax.persistence.*;
 @Setter
 @Table(name = "attractions")
 public class Attraction {
-
     @Id
     @NotEmpty
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "destinationId")
     @NotEmpty
-    @JsonIgnoreProperties({ "attractions" })
+    @JsonBackReference
     private Destination destination;
 
     @NotEmpty
     private String name;
 
     @NotEmpty
-    private Float hoursToVisit;
+    private float hoursToVisit;
 
     @NotEmpty
     private String type;
@@ -42,5 +43,5 @@ public class Attraction {
     private String description;
 
     @NotEmpty
-    private Float cost;
+    private float cost;
 }

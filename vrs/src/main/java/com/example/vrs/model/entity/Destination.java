@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Destination {
 
     @OneToMany(mappedBy = "destination")
     @Nullable
+    @JsonManagedReference
     private List<Attraction> attractions = new ArrayList<>();
 
     @OneToMany(mappedBy = "destination")
@@ -39,16 +42,16 @@ public class Destination {
     private String weather;
 
     @NotEmpty
-    private Long kidFriendlyScore;
+    private long kidFriendlyScore;
 
     @NotEmpty
-    private Long foodQualityScore;
+    private long foodQualityScore;
 
     @NotEmpty
-    private Long priceIndex;
+    private long priceIndex;
 
     @NotEmpty
-    private Long instagramAbilityScore;
+    private long instagramAbilityScore;
 
     @NotEmpty
     private String nativeLanguage;
@@ -57,7 +60,7 @@ public class Destination {
     private String purpose;
 
     @NotEmpty
-    private Long hotelQualityScore;
+    private long hotelQualityScore;
 
     @NotEmpty
     private String popularity;
@@ -75,7 +78,7 @@ public class Destination {
     private String currency;
 
     @NotEmpty
-    private Long attractionScore;
+    private long attractionScore;
 
     @NotEmpty
     private String safetyScore;
