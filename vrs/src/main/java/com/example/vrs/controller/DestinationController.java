@@ -85,4 +85,9 @@ public class DestinationController {
     void deleteDestination(@PathVariable("id") Long id) {
         repository.deleteById(id);
     }
+
+    @GetMapping("/destinations/{priceIndex}/{purpose}/{weather}")
+    List<Destination> searchDestinations(@PathVariable("priceIndex") String cost, @PathVariable("purpose") String priceIndex, @PathVariable("weather") String weather) {
+        return repository.search(cost, priceIndex, weather);
+    }
 }
