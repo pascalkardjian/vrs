@@ -2,12 +2,19 @@
   <div id="app">
   <b-container>
     <div>
-      <b-navbar toggleable type="dark" variant= "blue" >
+      <b-navbar toggleable type="dark" variant="dark">
       <b-navbar-brand href="#"><b-icon icon="" variant="warning" style="margin-left: 20px;"></b-icon> Vacation Recomendations </b-navbar-brand>
 
       <b-navbar-toggle target="sidebar-menu">
       </b-navbar-toggle>
-      
+      <b-sidebar id="sidebar-menu" title="Vacation Recomendations" backdrop-variant="dark" backdrop shadow>
+        <b-nav vertical align="center">
+          <b-nav-item to="/" exact exact-active-class="exact-active">Home</b-nav-item>
+          <b-nav-item to="/students" exact exact-active-class="exact-active">Trips</b-nav-item>
+          <b-nav-item to="/professors" exact exact-active-class="exact-active">Reviews</b-nav-item>
+          <b-nav-item disabled>Admin</b-nav-item>
+        </b-nav>
+      </b-sidebar>
     </b-navbar>
     </div>
     <br />

@@ -1,52 +1,40 @@
 <template>
   <div class="hello">
-    <h2> Students </h2>
+  
+  <h2> Trip Parameters </h2>
+
+    <label>Cost Preference:</label>
+  <select v-model="trip.cost">
+  <option disabled value="">Please select weather preference </option>
+  <option v-for = "cost in costs">{{cost}}</option>
+  
+</select>
+
+<label>Weather Preference:</label>
+    <select v-model="trip.weather">
+  <option disabled value="">Please select weather preference </option>
+  <option v-for = "weather in weathers">{{weather}}</option>
+
+</select>
+
+<label>Vacation Purpose:</label>
+    <select v-model="trip.purpose">
+  <option disabled value="">Please select weather preference </option>
+  <option v-for = "purpose in purposes">{{purpose}}</option>
+
+</select>
+
+    <b-button @click="search()">
+          Search Parameters
+  </b-button>
+
+    
     <b-table striped hover responsive :items="students" :fields="fields">
       <template #cell(actions)="row">
-        <b-button size="sm" v-b-modal.edit-modal @click="edit(row.item, row.index, $event.target)">
-          Edit
-        </b-button>
+        
       </template>
     </b-table>
-    <b-modal id="edit-modal" title="Edit Student" @hide="resetEditModal" hide-footer>
-      <b-form>
-
-        <label class="sr-only" for="input-id">Student ID</label>
-        <b-form-input
-          id='input-id'
-          v-model="form.id"
-          placeholder="Student ID"
-          readonly
-        ></b-form-input>
-
-        <label class="sr-only" for="input-first-name">First Name</label>
-        <b-form-input
-          id='input-first-name'
-          v-model="form.first_name"
-          placeholder="First Name"
-          required
-        ></b-form-input>
-
-        <label class="sr-only" for="input-last-name">Last Name</label>
-        <b-form-input
-          id="input-last-name"
-          v-model="form.last_name"
-          placeholder="Last Name"
-          required
-        ></b-form-input>
-
-        <label class="sr-only" for="input-email">Email</label>
-        <b-input-group prepend="@" >
-          <b-form-input id="input-email" v-model="form.email" placeholder="Email" required></b-form-input>
-        </b-input-group>
-        
-        <br />
-        <b-button type="button" @click="onSave" variant="primary">Save</b-button>
-        <b-button type="reset" variant="warning">Reset</b-button>
-        <b-button type="button" variant="danger">Remove Student</b-button>
-      </b-form>
-
-    </b-modal>
+    
   </div>
 </template>
 
@@ -58,28 +46,43 @@ export default {
   data () {
     return {
       students: null,
+      //field key must match attribute of object
       fields: [
-      {key: 'id', label: 'Student ID', sortable: true},
-      {key: 'lastName', label: 'Last Name', sortable: true},
-      {key: 'firstName', label: 'First Name', sortable: true},
-      {key: 'email', label: 'Email', sortable: true, sortable: true},
-      {key: 'actions', label: 'Actions'}],
+      {key: 'id', label: 'Trip ID', sortable: true},
+      {key: 'name', label: 'Destination Name', sortable: true},
+      {key: 'weather', label: 'Weather', sortable: true},
+      {key: 'priceIndex', label: 'Price', sortable: true},
+      {key: 'purpose', label: 'Purpose', sortable: true, sortable: true}],
       form: {
           email: '',
           first_name: '',
           last_name: '',
           id: ''
         },
+        trip:{
+        cost:"",
+        weather: "",
+        purpose: ""
+      },
+      costs: ["Low", "Medium", "High"],
+      weathers: ["Hot", "Cold", "Mild"],
+      purposes: ["Family Get Away", "Sight Seeing", "Historical Monuments"]
     }
   },
-  mounted () {
-    this.init();
-  },
+  
   methods: {
     init() {
       axios
         .get('http://localhost:8085/students')
         .then(response => (this.students = response.data))
+    },
+
+    search(){
+
+      axios
+        .get('http://localhost:8085/students')
+        .then(response => (this.students = response.data))
+
     },
     edit(item, index, button) {
       this.form.id = item.id
